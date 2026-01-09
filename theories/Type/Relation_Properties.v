@@ -51,7 +51,7 @@ Section Properties.
 
     (** Idempotency of the reflexive-transitive closure operator *)
 
-    Lemma clos_rt_idempotent : subrelation (R*)* R*.
+    Lemma clos_rt_idempotent : subrelation (R* )* R*.
     Proof.
       red.
       induction 1; auto with relations.

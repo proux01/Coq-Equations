@@ -703,12 +703,12 @@ Proof.
   invert_term. simpl in *. apply abstraction.
   specialize (H Γ (A0 :: Γ')). simpl in H. eqns_specialize_eqs H.
   simpl in H.
-  on_call hereditary_subst ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
+  on_call hereditary_subst ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
   specialize (H _ H0 H1).
   apply H; auto.
 
-  on_call hereditary_subst ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
-  on_call hereditary_subst ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
+  on_call hereditary_subst ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
+  on_call hereditary_subst ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
   depelim H2. constructor. now apply H. now apply H0.
   depelim H0. term.
 
@@ -730,7 +730,7 @@ Proof.
 
   (* App *)
   simpl in *.
-  - on_call (hereditary_subst (A, a, arg)) ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
+  - on_call (hereditary_subst (A, a, arg)) ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
     on_call hereditary_subst ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
     dependent elimination H2 as [application _ U T f arg tyfn tyu].
     specialize (H _ _ H1 tyu).
@@ -817,7 +817,7 @@ Proof.
   (** Lambda *)
   - cbn in *.
     on_call hereditary_subst
-            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
+            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
     split; intros Hsyn; [| elim (synth_arrow False Hsyn)].
 
     invert_term. constructor. 
@@ -830,7 +830,7 @@ Proof.
 
   (** Pairs *)
   - do 2 on_call hereditary_subst
-          ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
+          ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
     split; intros Hsyn; [|elim (synth_pair False Hsyn)].
     invert_term.
     specialize (H0 _ B H1). specialize (H _ A0 H1).
@@ -872,12 +872,12 @@ Proof.
 
   (* App *)
   - cbn. on_call (hereditary_subst (A,a,arg))
-            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
+            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
     specialize (H0 _ _ _ [] eq_refl).
     rewrite Heq0 in Hind.
     revert H0.
     on_call hereditary_subst
-            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
+            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
     intros.
 
     (* Redex *)
@@ -913,10 +913,10 @@ Proof.
       → Γ' @ Γ |-- @( f', fst (hereditary_subst (A, a, arg) (length Γ'))) => T).
     intros Ht; depelim Ht.
     on_call hereditary_subst
-            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
+            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
     revert Heq.
     on_call hereditary_subst
-            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
+            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
     intros.
     pose (Hind _ (A0 ---> T) Hu).
     destruct o0 as [[ty prf']|].
@@ -948,7 +948,7 @@ Proof.
     intros Γ T Hu.
     assert( (Γ' @ (A :: Γ) |-- Fst t' => T → Γ' @ Γ |-- u <= T ∧ a' = T)).
     intros Ht; depelim Ht. specialize (Hind _ (T × B) Hu). revert Hind.
-    on_call hereditary_subst ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
+    on_call hereditary_subst ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
     noconf Heq0. cbn in Heqcall. 
     intros [Hind Hind'].
     specialize (Hind' Ht). destruct Hind' as [H0 H1]. noconf H1.
@@ -961,7 +961,7 @@ Proof.
     assert (Γ' @ (A :: Γ) |-- Fst t' => T → Γ' @ Γ |-- Fst p' => T).
     intros Ht; depelim Ht.
     specialize (Hind _ (T × B) Hu). revert Hind.
-    on_call hereditary_subst ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
+    on_call hereditary_subst ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
     destruct o as [[ty prf]|]. intros [Hind Hind'].
     destruct (Hind' Ht). subst ty.
     depelim H. simp is_pair in Heq. discriminate.
@@ -977,7 +977,7 @@ Proof.
 
     intros Ht; depelim Ht. specialize (Hind _ (A0 × T) Hu). revert Hind.
     on_call hereditary_subst
-            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *).
+            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ).
     noconf Heq0.
     intros [Hind Hind'].
     specialize (Hind' Ht). destruct Hind' as [H0 H1]. noconf H1.
@@ -990,7 +990,7 @@ Proof.
     intros Ht; depelim Ht.
     specialize (Hind _ (A0 × T) Hu). revert Hind.
     on_call hereditary_subst
-            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in *). 
+            ltac:(fun c => remember c as hsubst; destruct hsubst; simpl in * ). 
     destruct o as [[ty prf]|]. intros [Hind Hind'].
     destruct (Hind' Ht). subst ty.
     depelim H. simp is_pair in Heq. discriminate.
